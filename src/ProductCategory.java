@@ -1,5 +1,5 @@
-public enum ProductCategory {
-    electronics,
+enum ProductCategory {
     clothing,
+    electronics,
     books
 }
