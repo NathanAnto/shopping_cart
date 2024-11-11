@@ -35,7 +35,7 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public void order() {
+    public void itemBought() {
         quantity--;
     }
 

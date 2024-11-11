@@ -1,4 +1,4 @@
-enum ProductCategory {
+public enum ProductCategory {
     clothing,
     electronics,
     books

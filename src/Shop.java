@@ -2,44 +2,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-// Invoker
 public class Shop {
-    private HashMap<UserAction, UserCommand> userCommands;
-    private HashMap<Integer, UserCommand> commandHistory;
-    private UserCommand currentCommand;
+    private static volatile Shop instance;
+    private User activeUser;
 
-    private int historyIndex = -1;
+    private Shop() {}
 
-    public Shop(ShoppingCart cart) {
-        userCommands = new HashMap<>();
-        commandHistory = new HashMap<>();
-
-        // adding commands
-        for (UserAction action : UserAction.values()) {
-            switch (action) {
-                case add_to_cart:
-                    userCommands.put(action, new AddToCart(cart));
-                    break;
-                case remove_from_cart:
-                    userCommands.put(action, new RemoveFromCart(cart));
-                    break;
-                case add_discount:
-                    userCommands.put(action, new AddDiscount(cart));
-                    break;
-                case checkout:
-                    userCommands.put(action, new Checkout(cart));
-                    break;
+    public static Shop getInstance() {
+        if (instance == null) {
+            synchronized (Shop.class) {
+                if (instance == null) {
+                    instance = new Shop();
+                }
             }
         }
+        return instance;
     }
 
-    public void setCurrentCommand(UserAction action) {
-        this.currentCommand = userCommands.get(action);
-    }
-
-    public void interaction() {
-        historyIndex++;
-        commandHistory.put(historyIndex, currentCommand);
-        currentCommand.execute();
+    public void setActiveUser(User user) {
+        this.activeUser = user;
     }
 }

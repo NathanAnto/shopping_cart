@@ -1,3 +1,4 @@
+import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class ShoppingCart {
 
     public void setDiscount(double discount) {
         if(discount < 0 || discount > 1) {
-            System.out.println("Invalid discount. Must be between 0 and 1s");
+            System.out.println("Invalid discount. Must be between 0 and 1");
             return;
         }
         this.discount = discount;
