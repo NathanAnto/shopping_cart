@@ -9,4 +9,9 @@ public class RemoveFromCart implements UserCommand {
     public void execute() {
         cart.removeItemFromCart();
     }
+
+    @Override
+    public void undo() {
+        cart.addItemToCart();
+    }
 }

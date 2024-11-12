@@ -16,6 +16,14 @@ public class ShoppingCart {
         this.currentItem = item;
     }
 
+    public List<Product> getProducts() {
+        return this.items;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
     public void setDiscount(double discount) {
         if(discount < 0 || discount > 1) {
             System.out.println("Invalid discount. Must be between 0 and 1");
@@ -35,11 +43,11 @@ public class ShoppingCart {
     }
 
     public void applyDiscountToCart() {
-        System.out.println("Adding discount to products");
+        System.out.println("Applying discount " + discount + " to products");
         for (Product item : items) {
             double priceBefore = item.getPrice();
             item.setPrice(item.getPrice() - (item.getPrice() * discount));
-            System.out.println(item + " went from " + priceBefore + " CHF to " + item.getPrice() + " CHF");
+            System.out.println(item + " went from " + priceBefore + " CHF to " + item.getDiscountedPrice() + " CHF");
         }
     }
 

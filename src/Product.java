@@ -1,12 +1,14 @@
 public class Product {
     protected String name;
     protected double price;
+    protected double discountedPrice;
     protected ProductCategory category;
     protected int quantity;
 
     public Product(String name, double price, ProductCategory category, int quantity) {
         this.name = name;
         this.price = price;
+        this.discountedPrice = price;
         this.category = category;
         this.quantity = quantity;
     }
@@ -23,8 +25,13 @@ public class Product {
         return price;
     }
 
+    public double getDiscountedPrice() {
+        return discountedPrice;
+    }
+
     public void setPrice(double price) {
-        this.price = price;
+        if(this.price != price)
+            this.discountedPrice = price;
     }
 
     public int getQuantity() {

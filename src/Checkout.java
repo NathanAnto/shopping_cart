@@ -9,4 +9,9 @@ public class Checkout implements UserCommand {
     public void execute() {
         this.cart.checkOut();
     }
+
+    @Override
+    public void undo() {
+        System.out.println("Checkout cannot be undone");
+    }
 }

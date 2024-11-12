@@ -15,6 +15,13 @@ public class Main {
         user1.addProductToCart(shirt);
         user1.addProductToCart(pants);
 
+        user1.showCartProducts();
+        // user1.undo();
+
         user1.applyDiscountToCart(0.1);
+        // user1.undo();
+
+        user1.showCartProducts();
+        user1.showUserHistory();
     }
 }

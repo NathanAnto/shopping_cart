@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 // Invoker
 public class User {
@@ -11,7 +12,7 @@ public class User {
 
     private int historyIndex = -1;
 
-    private Shop shop = Shop.getInstance();
+    private final Shop shop = Shop.getInstance();
 
     public User(String name, ShoppingCart cart) {
         this.username = name;
@@ -52,10 +53,15 @@ public class User {
         currentCommand.execute();
     }
 
+    public void undo() {
+        currentCommand.undo();
+        commandHistory.remove(historyIndex);
+        historyIndex--;
+    }
+
     public void addProductToCart(Product product) {
         setCurrentCommand(UserAction.add_to_cart);
         cart.setAffectedProduct(product);
-
         interaction();
     }
 
@@ -71,8 +77,15 @@ public class User {
         interaction();
     }
 
+    public void showCartProducts() {
+        for (Product p : cart.getProducts()) {
+            System.out.println(p.getName() + " at price " + p.getDiscountedPrice());
+        }
+    }
+
     public void showUserHistory() {
-
-
+        for(Map.Entry<Integer, UserCommand> set : commandHistory.entrySet()) {
+            System.out.println("Command " + set.getKey() + ": " + set.getValue().toString());
+        }
     }
 }
